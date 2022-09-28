@@ -1,5 +1,5 @@
 import { metaData as metaDataType, dataType } from "../types";
-class CheckBoxOperations {
+class NodeOperations {
   metaData: metaDataType;
   id: string;
   parentNodeIds: Array<string>;
@@ -165,4 +165,4 @@ class CheckBoxOperations {
   }
 }
 
-export { CheckBoxOperations };
+export { NodeOperations };

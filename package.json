@@ -2,11 +2,16 @@
   "name": "react-data-tree",
   "repository": {
     "type": "git",
-    "url": "https://github.com/GM1957/react-node-tree.git"
+    "url": "https://github.com/GM1957/react-data-tree.git"
   },
-  "version": "0.1.0",
-  "description": "a fully customizable node tree for react",
+  "version": "0.1.3",
+  "description": "highly customizable node tree for react",
   "private": false,
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "@types/node": "^16.11.59",
     "@types/react": "^18.0.21",
@@ -16,9 +21,6 @@
     "typescript": "^4.8.3",
     "web-vitals": "^2.1.4"
   },
-  "files": [
-    "dist"
-  ],
   "author": "gm1957",
   "license": "MIT",
   "scripts": {
