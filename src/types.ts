@@ -19,6 +19,7 @@ export type checkboxTreePropType = {
   NodeComponent: FC<{
     nodeData: any;
     parentNodeIds?: Array<string | number>;
+    isLastNode: boolean;
   }>;
   nodeProps?: any;
   rootProps?: any;
@@ -36,7 +37,6 @@ export type metaData = {
     isChecked: boolean;
     isSemiChecked: boolean;
     isNodeExpanded: boolean;
-    isLastNodeLevel: boolean;
     childrenIds?: Array<string | number>;
     [key: string]: any;
   };

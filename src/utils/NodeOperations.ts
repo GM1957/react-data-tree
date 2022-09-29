@@ -30,7 +30,6 @@ class NodeOperations {
                 ...treeNode,
                 isChecked: metaData[treeNode?.id]?.isChecked || false,
                 isNodeExpanded: metaData[treeNode?.id]?.isNodeExpanded || false,
-                isLastNodeLevel: !treeNode?.children?.length || false,
                 isSemiChecked: metaData[treeNode?.id]?.isSemiChecked || false,
                 childrenIds: treeNode?.children?.map((item) => item.id),
                 children: undefined,
@@ -68,7 +67,6 @@ class NodeOperations {
             ...data[id],
             isChecked: !data[id]?.isChecked,
             isNodeExpanded: !data[id]?.isChecked,
-            isLastNodeLevel: !data[id]?.children?.length,
             isSemiChecked: false,
           },
     };
@@ -117,33 +115,41 @@ class NodeOperations {
     const modData = modifiedData || this.getChildrenClickedData({});
 
     if (parentNodeIds?.length) {
-      parentNodeIds.reverse().forEach((parentNodeId) => {
+      for (let i = parentNodeIds.length - 1; i >= 0; i--) {
+        const parentNodeId = parentNodeIds[i];
         const childrenCount = modData[parentNodeId]?.childrenIds?.length;
         let checkedCount = 0;
+        let semiCheckedCount = 0;
+
         modData[parentNodeId]?.childrenIds?.forEach((childId: string) => {
           if (modData[childId]?.isChecked) {
             checkedCount += 1;
           }
+          if (modData[childId]?.isSemiChecked) {
+            semiCheckedCount += 1;
+          }
         });
+
         if (parentObjectsModifier) {
           modData[parentNodeId] = parentObjectsModifier({
             parentBoxData: modData[parentNodeId],
             checkedChildrenCount: checkedCount,
             childrenCount,
+            semiCheckedCount,
           });
         } else {
           if (checkedCount === 0) {
             modData[parentNodeId].isChecked = false;
             modData[parentNodeId].isSemiChecked = false;
-          } else if (checkedCount === childrenCount) {
+          } else if (checkedCount === childrenCount && semiCheckedCount == 0) {
             modData[parentNodeId].isChecked = true;
             modData[parentNodeId].isSemiChecked = false;
-          } else if (checkedCount < childrenCount) {
+          } else if (checkedCount < childrenCount || semiCheckedCount > 0) {
             modData[parentNodeId].isChecked = true;
             modData[parentNodeId].isSemiChecked = true;
           }
         }
-      });
+      }
     }
 
     return modData;

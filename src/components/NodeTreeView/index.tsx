@@ -16,7 +16,11 @@ const NodeTreeViewComponent = (props: checkboxTreePropType) => {
     const { nodeObj, parentNodeIds } = props;
     return (
       <div {...nodeProps}>
-        <NodeComponent nodeData={nodeObj} parentNodeIds={parentNodeIds} />
+        <NodeComponent
+          nodeData={nodeObj}
+          parentNodeIds={parentNodeIds}
+          isLastNode={nodeObj?.children?.length ? false : true}
+        />
         <div
           style={{
             display: metaData[nodeObj?.id]?.isNodeExpanded ? "block" : "none",
@@ -27,7 +31,7 @@ const NodeTreeViewComponent = (props: checkboxTreePropType) => {
             nodeObj?.children?.length > 0 &&
             nodeObj?.children?.map((item: any) => (
               <div
-                className="ml-2"
+                style={{ marginLeft: "15px" }}
                 key={`${item?.id}-nested-key`}
                 {...nestedNodeProps}
               >
