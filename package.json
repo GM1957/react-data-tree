@@ -4,7 +4,7 @@
     "type": "git",
     "url": "https://github.com/GM1957/react-data-tree.git"
   },
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "highly customizable node tree for react",
   "private": false,
   "main": "dist/cjs/index.js",
